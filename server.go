@@ -7,7 +7,7 @@ import (
 )
 
 // Creating an object that the server will register
-// The type must be exported
+// This type must be exported
 type Greeting string
 
 // See the "net/rpc" package to understand which criteria must be met
@@ -19,6 +19,7 @@ func (g *Greeting) SayHello(name string, reply *string) error {
 
 func main() {
 	greeting := new(Greeting)
+// Registering greeting so the method defined on it can be called remotely
 	rpc.Register(greeting)
 	l, err := net.Listen("tcp", ":8080")
 	if err != nil {
